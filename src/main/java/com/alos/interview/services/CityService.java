@@ -1,15 +1,17 @@
 package com.alos.interview.services;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.alos.interview.dtos.CityDto;
+import com.alos.interview.exception.InvalidFieldException;
 
-public interface CityService {
+public interface CityService extends Serializable{
 
-	public CityDto save(CityDto city);
+	public CityDto save(CityDto city) throws InvalidFieldException;
 
-	public List<CityDto> findCityByName(String name);
+	public List<CityDto> findByName(String name) throws InvalidFieldException;
 
-	public List<CityDto> findCityByState(String state);
+	public List<CityDto> findByState(String state) throws InvalidFieldException;
 
 }

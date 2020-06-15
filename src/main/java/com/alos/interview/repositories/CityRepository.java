@@ -2,16 +2,16 @@ package com.alos.interview.repositories;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.alos.interview.models.CityModel;
 
 @Repository
-public interface CityRepository extends JpaRepository<CityModel, Long> {
+public interface CityRepository extends CrudRepository<CityModel, Long> {
 	
-	public List<CityModel> findByNameContaining(String name);
+	List<CityModel> findByName(String name);
 	
-	public List<CityModel> findByStateContaining (String state);
+	List<CityModel> findByState (String state);
 
 }

@@ -3,22 +3,25 @@ package com.alos.interview.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.alos.interview.dtos.CityDto;
 import com.alos.interview.models.CityModel;
 
+@Service
 public class CityUtil {
 
-	public static CityDto entityToDto(CityModel city) {
+	public CityDto entityToDto(CityModel model) {
 
 		CityDto dto = new CityDto();
-		dto.setId(city.getId());
-		dto.setName(city.getName());
-		dto.setState(city.getState());
+		dto.setId(model.getId());
+		dto.setName(model.getName());
+		dto.setState(model.getState());
 
 		return dto;
 	}
 
-	public static CityModel dtoToEntity(CityDto dto) {
+	public CityModel dtoToEntity(CityDto dto) {
 
 		CityModel model = new CityModel();
 		model.setId(dto.getId());
@@ -27,13 +30,17 @@ public class CityUtil {
 		return model;
 
 	}
-	
-	public static List<CityDto> listEntityToListDto(List<CityModel> listModel){
-		List<CityDto> listDto = new  ArrayList<>();
-		listModel.forEach(client -> {
-			listDto.add(entityToDto(client));
-		});
-		return listDto;
+
+	public List<CityDto> listEntityToListDto(List<CityModel> listModel) {
+		List<CityDto> saida = new ArrayList<CityDto>();
+		for (CityModel model : listModel) {
+			CityDto dto = new CityDto();
+			dto.setId(model.getId());
+			dto.setName(model.getName());
+			dto.setState(model.getState());
+			saida.add(dto);
+		}
+		return saida;
 	}
 
 }
