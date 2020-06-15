@@ -20,26 +20,33 @@ import com.alos.interview.dtos.CityDto;
 import com.alos.interview.exception.InvalidFieldException;
 import com.alos.interview.services.CityService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/v1/cidades/", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(value = "API REST Cidades")
 public class CityController {
 
 	@Autowired
 	private CityService service;
 
 	@PostMapping
+	@ApiOperation(value = "Insere uma cidade")
 	public CityDto save(@Valid @RequestBody CityDto city) throws InvalidFieldException{
 		return service.save(city);
 	}
 
 	@GetMapping("/nome/{name}")
+	@ApiOperation(value = "Pesquisa uma cidade pelo nome")
 	public List<CityDto> findByName(@PathVariable String name) throws InvalidFieldException{
 		return service.findByName(name);
 	}
 
 	@GetMapping("/state/{state}")
+	@ApiOperation(value = "Pesquisa uma cidade pelo seu estado")
 	public List<CityDto> findByState(@PathVariable String state) throws InvalidFieldException{
-		return service.findByName(state);
+		return service.findByState(state);
 	}
 	
 	@ExceptionHandler

@@ -24,8 +24,12 @@ import com.alos.interview.dtos.UpdateClienteDto;
 import com.alos.interview.exception.InvalidFieldException;
 import com.alos.interview.services.ClientService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/v1/clientes/", produces = MediaType.APPLICATION_JSON_VALUE)
+@Api(value = "API REST Clientes")
 public class ClientController {
 
 	@Autowired
@@ -33,29 +37,34 @@ public class ClientController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@ApiOperation(value = "Insere um cliente")
 	public ClientDto insert(@Valid @RequestBody ClientDto clientParam) throws InvalidFieldException{
 		return clienteService.save(clientParam);
 	}	
 	
 
 	@GetMapping("/name/{clientName}")
+	@ApiOperation(value = "Pesquisa um cliente pelo nome")
 	public List<ClientDto> findByName(@PathVariable @NotNull String clientName) throws InvalidFieldException{
 		return clienteService.findByName(clientName);
 	}
 	
 
 	@GetMapping("/{id}")
+	@ApiOperation(value = "Pesquisa um cliente pelo ID")
 	public ClientDto findById(@PathVariable Long id) throws InvalidFieldException{
 		return clienteService.findById(id);
 	}
 	
 
 	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Deleta um cliente")
 	public Boolean deleteById(@PathVariable @NotNull Long id) throws InvalidFieldException{
 		return clienteService.deleteById(id);
 	}
 
 	@PutMapping
+	@ApiOperation(value = "Altera o nome de um cliente")
 	public ClientDto updateClienteName(@RequestBody UpdateClienteDto client) throws InvalidFieldException{
 		return clienteService.updateName(client);
 	}
